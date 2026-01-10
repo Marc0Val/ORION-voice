@@ -1,0 +1,16 @@
+# Node
+node_modules/
+frontend/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+backend/venv/
+
+# Docker & OS
+.DS_Store
+*.log
+
+# Seguridad (NO subir certificados reales)
+certs/*.key
+certs/*.crt
