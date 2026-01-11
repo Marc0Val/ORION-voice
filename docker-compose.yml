@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   backend:
     build: ./backend
@@ -7,17 +5,17 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/model:/app/model # Mapea el modelo de Vosk para no pesarlo en la imagen
+      - ./backend/model:/app/model
     restart: always
 
   frontend:
-    build: ORION-FRONTEND
-    container_name: ORION-FRONTEND
+    build: ./frontend
+    container_name: yarbis-frontend
     ports:
-      - "443:443" # Puerto HTTPS para el micrófono
-      - "80:80"   # Puerto HTTP (redirección)
+      - "443:443"
+      - "80:80"
     depends_on:
       - backend
     volumes:
-      - ./certs:/etc/nginx/ssl # Aquí irán tus certificados SSL
+      - ./certs:/etc/nginx/ssl
     restart: always
