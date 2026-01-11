@@ -11,8 +11,8 @@ services:
     restart: always
 
   frontend:
-    build: ./frontend
-    container_name: yarbis-frontend
+    build: ORION-FRONTEND
+    container_name: ORION-FRONTEND
     ports:
       - "443:443" # Puerto HTTPS para el micrófono
       - "80:80"   # Puerto HTTP (redirección)
