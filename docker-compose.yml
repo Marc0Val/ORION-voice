@@ -1,6 +1,6 @@
 services:
   backend:
-    build: ./backend
+    build: ./ORION-BACKEND
     container_name: yarbis-backend
     ports:
       - "8000:8000"
@@ -9,7 +9,7 @@ services:
     restart: always
 
   frontend:
-    build: ./frontend
+    build: ./ORION-FRONTEND
     container_name: yarbis-frontend
     ports:
       - "443:443"
