@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { usePorcupine } from '@picovoice/porcupine-react';
+import React, { useEffect, useState } from "react";
+import { usePorcupine } from "@picovoice/porcupine-react";
+import VoiceIndicator from "./components/VoiceIndicator";
 
 const { VITE_PICOVOICE_ACCESS_KEY } = import.meta.env;
 
@@ -19,7 +20,9 @@ function App() {
   useEffect(() => {
     const runInit = async () => {
       if (!VITE_PICOVOICE_ACCESS_KEY) {
-        console.error("La clave de acceso de PicoVoice no está configurada en .env");
+        console.error(
+          "La clave de acceso de PicoVoice no está configurada en .env"
+        );
         return;
       }
 
@@ -67,7 +70,14 @@ function App() {
   // Manejo de errores
   if (error) {
     return (
-      <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'sans-serif', color: 'red' }}>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "50px",
+          fontFamily: "sans-serif",
+          color: "red",
+        }}
+      >
         <h1>Error en Porcupine</h1>
         <p>{error.toString()}</p>
       </div>
@@ -75,31 +85,26 @@ function App() {
   }
 
   const getStatusText = () => {
-    if (!isLoaded) return 'CARGANDO MOTOR...';
-    if (detected) return '¡ORION DETECTADO!';
-    if (isListening) return 'ESCUCHANDO...';
-    return 'INICIANDO...';
+    if (!isLoaded) return "CARGANDO MOTOR...";
+    if (detected) return "¡ORION DETECTADO!";
+    if (isListening) return "ESCUCHANDO...";
+    return "INICIANDO...";
   };
 
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px', fontFamily: 'sans-serif' }}>
+    <div
+      style={{
+        textAlign: "center",
+        marginTop: "50px",
+        fontFamily: "sans-serif",
+      }}
+    >
       <h1>Proyecto ORION</h1>
-      <div style={{
-        padding: '20px',
-        borderRadius: '50%',
-        width: '200px',
-        height: '200px',
-        margin: '0 auto',
-        backgroundColor: detected ? '#00ff00' : '#333',
-        color: 'white',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        transition: 'background-color 0.3s ease'
-      }}>
-        {getStatusText()}
-      </div>
-      <p>{isLoaded && isListening ? "Dí 'Orion' para probar" : "Espera un momento..."}</p>
+      <VoiceIndicator />
+      <p style={{ marginTop: "20px" }}>
+        {/* El estado ahora se maneja dentro de VoiceIndicator */}
+        Dí 'Orion' para iniciar una orden.
+      </p>
     </div>
   );
 }
