@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: yarbis-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/model:/app/model # Mapea el modelo de Vosk para no pesarlo en la imagen
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: yarbis-frontend
+    ports:
+      - "443:443" # Puerto HTTPS para el micrófono
+      - "80:80"   # Puerto HTTP (redirección)
+    depends_on:
+      - backend
+    volumes:
+      - ./certs:/etc/nginx/ssl # Aquí irán tus certificados SSL
+    restart: always
